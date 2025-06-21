@@ -14,13 +14,21 @@ if 'telugu_home' not in st.session_state:
     st.session_state.telugu_home = False
 if 'telugu_education' not in st.session_state:
     st.session_state.telugu_education = False
-
 # CSS Styles
 st.markdown("""
 <style>
+    /* Force light theme colors */
+    :root {
+        --primary-color: #1A3F64;
+        --background-color: #FFFFFF;
+        --secondary-background-color: #F0F2F6;
+        --text-color: #262730;
+        --font: sans serif;
+    }
+    
     /* Main background */
     .stApp {
-        background-color: #FFFFFF;
+        background-color: #FFFFFF !important;
     }
     
     /* Uniform card styling */
@@ -32,6 +40,7 @@ st.markdown("""
         background-color: white;
         transition: transform 0.2s;
         height: 100%;
+        border: 1px solid #e0e0e0;
     }
     .uniform-card:hover {
         transform: translateY(-2px);
@@ -60,6 +69,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-left: 4px solid #1A3F64;
     }
     .warning-box {
         background-color: white;
@@ -67,6 +77,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-left: 4px solid #FFA500;
     }
     .success-box {
         background-color: white;
@@ -74,6 +85,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-left: 4px solid #4CAF50;
     }
     .error-box {
         background-color: white;
@@ -81,6 +93,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-left: 4px solid #F44336;
     }
     
     /* Sidebar styling */
@@ -93,15 +106,24 @@ st.markdown("""
         background-color: #1A3F64 !important;
         color: white !important;
         border: none !important;
+        transition: all 0.3s ease;
     }
     .sidebar-button:hover {
         background-color: #425973 !important;
+        transform: translateX(5px);
     }
     
     /* Titles */
     h1 {
         color: #012F5C !important;
         padding-bottom: 8px;
+        border-bottom: 2px solid #1A3F64;
+    }
+    h2 {
+        color: #1A3F64 !important;
+    }
+    h3 {
+        color: #425973 !important;
     }
     
     /* Buttons */
@@ -110,9 +132,11 @@ st.markdown("""
         color: white;
         border: none;
         border-radius: 4px;
+        transition: all 0.3s ease;
     }
     .stButton>button:hover {
         background-color: #425973;
+        transform: scale(1.02);
     }
     
     /* Button container */
@@ -132,6 +156,60 @@ st.markdown("""
         top: 10px;
         right: 10px;
         z-index: 1000;
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    /* Tabs styling */
+    [data-baseweb="tab-list"] {
+        gap: 10px;
+    }
+    [data-baseweb="tab"] {
+        background-color: #F0F2F6 !important;
+        border-radius: 4px !important;
+        padding: 8px 16px !important;
+        margin: 0 5px !important;
+        transition: all 0.3s ease !important;
+    }
+    [data-baseweb="tab"]:hover {
+        background-color: #E0E5EC !important;
+    }
+    [data-baseweb="tab"][aria-selected="true"] {
+        background-color: #1A3F64 !important;
+        color: white !important;
+    }
+    
+    /* Input fields */
+    .stTextInput>div>div>input, 
+    .stTextArea>div>div>textarea, 
+    .stNumberInput>div>div>input {
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Divider styling */
+    hr {
+        margin: 20px 0;
+        border: none;
+        height: 1px;
+        background-color: #e0e0e0;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #1A3F64;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #012F5C;
     }
 </style>
 """, unsafe_allow_html=True)
