@@ -1280,8 +1280,24 @@ def show_symptom_details(symptom_key):
     
     col3, col5 = st.columns(2)
     with col3:
-        if st.button("📚 Learn More (External Link)", key=f"learn_{symptom_key}"):
-            webbrowser.open_new_tab(symptom["learn more"])
+        st.markdown(
+            f"""
+            <a href="{symptom['learn more']}" target="_blank" style="text-decoration: none;">
+                <button style="
+                    background-color: #1A3F64;
+                    color: white;
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                ">
+                    📚 Learn More (External Link)
+                </button>
+            </a>
+            """,
+            unsafe_allow_html=True
+        )
     with col5:
         if st.button("🩺 Post Treatment Care", key=f"postcare_{symptom_key}"):
             st.session_state.page = "post_treatment_care"
